@@ -1,6 +1,6 @@
 package com.projetowebservice.course.config;
 
-
+import java.sql.Array;
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -11,12 +11,13 @@ import org.springframework.context.annotation.Profile;
 
 import com.projetowebservice.course.entities.Category;
 import com.projetowebservice.course.entities.Order;
+import com.projetowebservice.course.entities.Product;
 import com.projetowebservice.course.entities.User;
 import com.projetowebservice.course.entities.enums.OrderStatus;
 import com.projetowebservice.course.repositories.CategoryRepository;
 import com.projetowebservice.course.repositories.OrderRepository;
+import com.projetowebservice.course.repositories.ProductRepository;
 import com.projetowebservice.course.repositories.UserRepository;
-
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
@@ -29,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -37,7 +41,14 @@ public class TestConfig implements CommandLineRunner {
 		Category cat2 = new Category(null, "Games");
 		Category cat3 = new Category(null, "Computers & Tablets");
 		
+		Product p1 = new Product(null, "Call of Duty", "War, blood and guns", 40.0, "");
+		Product p2 = new Product(null, "Smart TV", "Buy this TV for watch your series", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Your future needs a Macbook", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "'This is just for study'", 1200.0, "");
+		Product p5 = new Product(null, "Fifa 25", "You'll have headache in this game", 100.99, "");
+		
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
 		User u1 = new User(null, "Rodrigo Garro", "garro@gmail.com", "987456321", "102030");
 		User u2 = new User(null, "Igor Coronado", "coronado@gmail.com", "965412389", "051015");
